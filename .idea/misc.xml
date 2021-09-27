@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background_gray_stroke_radius_round.xml" value="0.290625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/item_book.xml" value="0.333786231884058" />
+        <entry key="app/src/main/res/layout/item_book.xml" value="0.45" />
       </map>
     </option>
   </component>
