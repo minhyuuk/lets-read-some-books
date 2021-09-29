@@ -3,6 +3,8 @@ package com.project.book.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.view.MotionEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.book.R
 import com.project.book.adapter.BookAdapter
@@ -10,6 +12,7 @@ import com.project.book.api.BookService
 import com.project.book.databinding.ActivityMainBinding
 import com.project.book.model.BestSellerDTO
 import com.project.book.model.Book
+import com.project.book.model.SearchBookDTO
 import com.project.book.util.API
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var adapter: BookAdapter
+    private lateinit var bookService: BookService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -36,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val bookService = retrofit.create(BookService::class.java)
+        bookService = retrofit.create(BookService::class.java)
 
         bookService.getBestSellerBooks(API.KEY)
             .enqueue(object : Callback<BestSellerDTO> {
@@ -61,6 +66,44 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<BestSellerDTO>, t: Throwable) {
+                    // 실패 처리
+                    Log.e(TAG, t.toString())
+                }
+            })
+
+        binding.searchEditText.setOnKeyListener{v, keyCode, event->
+            if(keyCode == KeyEvent.KEYCODE_ENTER && event.action == MotionEvent.ACTION_DOWN){
+                search(binding.searchEditText.text.toString())
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
+        }
+    }
+
+    private fun search(keyword: String){
+        bookService.getBooksByMain(API.KEY,keyword)
+            .enqueue(object : Callback<SearchBookDTO> {
+                override fun onResponse(
+                    call: Call<SearchBookDTO>,
+                    response: Response<SearchBookDTO>
+                ) {
+                    // 성공 처리
+                    if (response.isSuccessful.not()) {
+                        Log.e(TAG, "Not success")
+
+                        return
+                    }
+                    response.body()?.let {
+                        Log.d(TAG, it.toString())
+
+                        it.books.forEach { book ->
+                            Log.d(TAG, book.toString())
+                        }
+                        adapter.submitList(response.body()?.books.orEmpty())
+                    }
+                }
+
+                override fun onFailure(call: Call<SearchBookDTO>, t: Throwable) {
                     // 실패 처리
                     Log.e(TAG, t.toString())
                 }
