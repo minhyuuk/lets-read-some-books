@@ -5,13 +5,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
+import com.project.book.AppDatabase
 import com.project.book.R
 import com.project.book.adapter.BookAdapter
+import com.project.book.adapter.HistoryAdapter
 import com.project.book.api.BookService
 import com.project.book.databinding.ActivityMainBinding
 import com.project.book.model.BestSellerDTO
 import com.project.book.model.Book
+import com.project.book.model.History
 import com.project.book.model.SearchBookDTO
 import com.project.book.util.API
 import retrofit2.Call
@@ -25,14 +30,25 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var adapter: BookAdapter
     private lateinit var bookService: BookService
+    private lateinit var db: AppDatabase
+    private lateinit var historyAdapter:HistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        dbSetting()
         initBookRecyclerView()
         retrofitClient()
 
+    }
+
+    private fun dbSetting(){
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "BookSearchDB"
+        ).build()
     }
 
     private fun retrofitClient() {
@@ -87,6 +103,8 @@ class MainActivity : AppCompatActivity() {
                     call: Call<SearchBookDTO>,
                     response: Response<SearchBookDTO>
                 ) {
+
+                    saveSearchKeyword(keyword)
                     // 성공 처리
                     if (response.isSuccessful.not()) {
                         Log.e(TAG, "Not success")
@@ -108,6 +126,24 @@ class MainActivity : AppCompatActivity() {
                     Log.e(TAG, t.toString())
                 }
             })
+    }
+
+    private fun showRecyclerView(){
+        Thread{
+            val keywords = db.historyDao().getAll().reversed()
+        }
+        binding.historyRecyclerView.isVisible = true
+    }
+
+    private fun hideRecyclerView(){
+
+        binding.historyRecyclerView.isVisible = false
+    }
+
+    private fun saveSearchKeyword(keyword:String){
+        Thread{
+            db.historyDao().insertHistory(History(null,keyword))
+        }.start()
     }
 
     private fun initBookRecyclerView() {
