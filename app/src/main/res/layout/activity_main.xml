@@ -11,6 +11,7 @@
         android:id="@+id/search_edit_text"
         android:layout_width="0dp"
         android:lines="1"
+        android:hint="검색할 책을 입력하세요"
         android:inputType="text"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,10 +23,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:listitem="@layout/item_book"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_edit_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_edit_text" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_recycler_view"
@@ -33,9 +34,9 @@
         android:layout_height="0dp"
         android:visibility="gone"
         android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_edit_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_edit_text"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
