@@ -10,7 +10,7 @@ import com.bumptech.glide.annotation.GlideModule
 import com.project.book.databinding.ItemBookBinding
 import com.project.book.model.Book
 
-class BookAdapter : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil) {
+class BookAdapter(private val itemClickedListener:(Book) -> Unit) : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil) {
 
     @GlideModule
     inner class BookItemViewHolder(private val binding: ItemBookBinding) :
@@ -20,6 +20,9 @@ class BookAdapter : ListAdapter<Book, BookAdapter.BookItemViewHolder>(diffUtil) 
             binding.titleTextView.text = bookModel.title
             binding.descriptionTextView.text = bookModel.description
 
+            binding.root.setOnClickListener{
+                itemClickedListener(bookModel)
+            }
             Glide
                 .with(binding.coverImageView.context)
                 .load(bookModel.coverSmallUrl)
