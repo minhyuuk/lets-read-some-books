@@ -8,7 +8,7 @@ import com.project.book.model.History
 @Dao
 interface HistoryDao {
 
-    @Query("SELECT * FROM History")
+    @Query("SELECT * FROM history")
     fun getAll(): List<History>
 
     @Insert

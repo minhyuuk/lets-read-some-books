@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.book.databinding.ItemHistoryBinding
 import com.project.book.model.History
 
-class HistoryAdapter(val historyDeleteClickListener: (String) -> (Unit)) : ListAdapter<History, HistoryAdapter.ViewHolder>(diffUtil) {
+class HistoryAdapter(val historyDeleteClickListener: (String) -> (Unit)) : ListAdapter<History, HistoryAdapter.HistoryItemViewHolder>(diffUtil) {
 
-    inner class ViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class HistoryItemViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(historyModel: History) {
             binding.historyKeywordTextView.text = historyModel.keyword
@@ -21,11 +21,11 @@ class HistoryAdapter(val historyDeleteClickListener: (String) -> (Unit)) : ListA
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryItemViewHolder {
+        return HistoryItemViewHolder(ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HistoryItemViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
 
@@ -35,7 +35,7 @@ class HistoryAdapter(val historyDeleteClickListener: (String) -> (Unit)) : ListA
                 oldItem == newItem
 
             override fun areItemsTheSame(oldItem: History, newItem: History) =
-                oldItem.uid == newItem.uid
+                oldItem.keyword == newItem.keyword
         }
     }
 
