@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        dbSetting()
         initBookRecyclerView()
+        dbSetting()
         initHistoryRecyclerView()
         retrofitClient()
 
@@ -96,7 +96,6 @@ class MainActivity : AppCompatActivity() {
                     call: Call<SearchBookDTO>,
                     response: Response<SearchBookDTO>
                 ) {
-
                     hideRecyclerView()
                     saveSearchKeyword(keyword)
                     // 성공 처리
@@ -106,10 +105,10 @@ class MainActivity : AppCompatActivity() {
                         return
                     }
                     response.body()?.let {
-//                        Log.d(TAG, it.toString())
+                        Log.d(TAG, it.toString())
 
                         it.books.forEach { book ->
-//                            Log.d(TAG, book.toString())
+                            Log.d(TAG, book.toString())
                         }
                         adapter.submitList(response.body()?.books.orEmpty())
                     }
@@ -140,12 +139,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerView() {
-        Log.d(TAG,"showRecyclerView")
+        Log.d(TAG,"show history recycler view")
         Thread {
             val keywords = db.historyDao().getAll().reversed()
+
             runOnUiThread {
                 binding.historyRecyclerView.isVisible = true
-                historyAdapter.submitList(keywords)
+                historyAdapter.submitList(keywords.orEmpty())
             }
             Log.d(TAG,"${keywords.toString()}")
         }.start()
@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun deleteSearchKeyword(keyword: String) {
         Thread {
-            db.historyDao().delete(keyword = keyword)
+            db.historyDao().delete(keyword)
             showRecyclerView()
         }.start()
     }
@@ -173,17 +173,16 @@ class MainActivity : AppCompatActivity() {
     private fun initBookRecyclerView() {
         adapter = BookAdapter()
 
-        binding.bookRecyclerView.adapter = adapter
         binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.bookRecyclerView.adapter = adapter
     }
 
     private fun initHistoryRecyclerView() {
         historyAdapter = HistoryAdapter(historyDeleteClickListener = {
             deleteSearchKeyword(it)
         })
-
-        binding.historyRecyclerView.adapter = adapter
         binding.historyRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.historyRecyclerView.adapter = historyAdapter
 
         initSearchEditText()
     }
