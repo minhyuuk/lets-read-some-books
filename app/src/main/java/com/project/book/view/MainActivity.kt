@@ -1,5 +1,6 @@
 package com.project.book.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -171,7 +172,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBookRecyclerView() {
-        adapter = BookAdapter()
+        adapter = BookAdapter(itemClickedListener = {
+            val intent = Intent(this,DetailActivity::class.java)
+            intent.putExtra("bookModel",it)
+            startActivity(intent)
+        })
 
         binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.bookRecyclerView.adapter = adapter
@@ -186,6 +191,7 @@ class MainActivity : AppCompatActivity() {
 
         initSearchEditText()
     }
+
 
     companion object {
         private const val TAG = "MainActivity"
