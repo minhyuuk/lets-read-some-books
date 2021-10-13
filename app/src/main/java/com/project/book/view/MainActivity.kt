@@ -14,6 +14,7 @@ import com.project.book.adapter.BookAdapter
 import com.project.book.adapter.HistoryAdapter
 import com.project.book.api.BookService
 import com.project.book.databinding.ActivityMainBinding
+import com.project.book.getAppDatabase
 import com.project.book.model.BestSellerDTO
 import com.project.book.model.History
 import com.project.book.model.SearchBookDTO
@@ -44,11 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dbSetting() {
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "BookSearchDB"
-        ).build()
+        db = getAppDatabase(this)
     }
 
     private fun retrofitClient() {
