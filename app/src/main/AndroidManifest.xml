@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Book"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.SplashActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.DetailActivity"
             android:exported="true" />
         <activity

@@ -9,9 +9,10 @@ import com.project.book.model.Review
 @Dao
 interface ReviewDao {
 
-    @Query("SELECT * FROM Review WHERE id == :id")
-    fun getReview(id:Int) : Review
+    @Query("SELECT * FROM review WHERE uid = :uid")
+    fun getOne(uid: Int): Review
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveReview(review: Review)
+
 }

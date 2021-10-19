@@ -1,5 +1,6 @@
 package com.project.book.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,11 +15,11 @@ import com.project.book.adapter.BookAdapter
 import com.project.book.adapter.HistoryAdapter
 import com.project.book.api.BookService
 import com.project.book.databinding.ActivityMainBinding
-import com.project.book.getAppDatabase
 import com.project.book.model.BestSellerDTO
 import com.project.book.model.History
-import com.project.book.model.SearchBookDTO
+import com.project.book.model.SearchBooksDTO
 import com.project.book.util.API
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,170 +28,142 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: BookAdapter
-    private lateinit var bookService: BookService
-    private lateinit var db: AppDatabase
     private lateinit var historyAdapter: HistoryAdapter
 
+    private lateinit var service: BookService
+
+    private lateinit var db: AppDatabase
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initBookRecyclerView()
-        dbSetting()
-        initHistoryRecyclerView()
-        retrofitClient()
 
-    }
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "historyDB"
+        ).build()
 
-    private fun dbSetting() {
-        db = getAppDatabase(this)
-    }
+        adapter = BookAdapter(clickListener = {
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("bookModel", it)
+            startActivity(intent)
+        })
+        historyAdapter = HistoryAdapter(historyDeleteClickListener = {
+            deleteSearchKeyword(it)
+        })
 
-    private fun retrofitClient() {
+
         val retrofit = Retrofit.Builder()
             .baseUrl(API.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        bookService = retrofit.create(BookService::class.java)
+        service = retrofit.create(BookService::class.java)
+        service.getBestSeller(API.KEY)
+            .enqueue(object: Callback<BestSellerDTO> {
+                override fun onFailure(call: Call<BestSellerDTO>, t: Throwable) {
 
-        bookService.getBestSellerBooks(API.KEY)
-            .enqueue(object : Callback<BestSellerDTO> {
-                override fun onResponse(
-                    call: Call<BestSellerDTO>,
-                    response: Response<BestSellerDTO>
-                ) {
-                    // 성공 처리
+                }
+
+                override fun onResponse(call: Call<BestSellerDTO>, response: Response<BestSellerDTO>) {
                     if (response.isSuccessful.not()) {
-                        Log.e(TAG, "Not success")
-
                         return
                     }
-                    response.body()?.let {
-//                        Log.d(TAG, it.toString())
 
-                        it.books.forEach { book ->
-                            Log.d(TAG, book.toString())
-                        }
+                    response.body()?.let {
                         adapter.submitList(it.books)
                     }
                 }
 
-                override fun onFailure(call: Call<BestSellerDTO>, t: Throwable) {
-                    // 실패 처리
-                    Log.e(TAG, t.toString())
-                }
             })
 
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
 
-    }
-
-    private fun search(keyword: String) {
-        bookService.getBooksByMain(API.KEY, keyword)
-            .enqueue(object : Callback<SearchBookDTO> {
-                override fun onResponse(
-                    call: Call<SearchBookDTO>,
-                    response: Response<SearchBookDTO>
-                ) {
-                    hideRecyclerView()
-                    saveSearchKeyword(keyword)
-                    // 성공 처리
-                    if (response.isSuccessful.not()) {
-                        Log.e(TAG, "Not success")
-
-                        return
-                    }
-                    response.body()?.let {
-                        Log.d(TAG, it.toString())
-
-                        it.books.forEach { book ->
-                            Log.d(TAG, book.toString())
-                        }
-                        adapter.submitList(response.body()?.books.orEmpty())
-                    }
-                }
-
-                override fun onFailure(call: Call<SearchBookDTO>, t: Throwable) {
-                    // 실패 처리
-                    hideRecyclerView()
-                    Log.e(TAG, t.toString())
-                }
-            })
-    }
-
-    private fun initSearchEditText() {
         binding.searchEditText.setOnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == MotionEvent.ACTION_DOWN) {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
                 search(binding.searchEditText.text.toString())
                 return@setOnKeyListener true
             }
             return@setOnKeyListener false
+
         }
+
         binding.searchEditText.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
-                showRecyclerView()
+                showHistoryView()
             }
+
             return@setOnTouchListener false
         }
+
+
+        binding.historyRecyclerView.adapter = historyAdapter
+        binding.historyRecyclerView.layoutManager = LinearLayoutManager(this)
+
+
     }
 
-    private fun showRecyclerView() {
-        Log.d(TAG,"show history recycler view")
-        Thread {
-            val keywords = db.historyDao().getAll().reversed()
+    private fun search(text: String) {
 
-            runOnUiThread {
-                binding.historyRecyclerView.isVisible = true
-                historyAdapter.submitList(keywords.orEmpty())
+
+        service.getBooksByName(API.KEY, text)
+            .enqueue(object: Callback<SearchBooksDTO> {
+                override fun onFailure(call: Call<SearchBooksDTO>, t: Throwable) {
+                    hideHistoryView()
+                }
+
+                override fun onResponse(call: Call<SearchBooksDTO>, response: Response<SearchBooksDTO>) {
+
+                    hideHistoryView()
+                    saveSearchKeyword(text)
+
+                    if (response.isSuccessful.not()) {
+                        return
+                    }
+
+                    response.body()?.let {
+                        adapter.submitList(it.books)
+                        Log.e("MainTag",adapter.submitList(it.books).toString())
+                    }
+                }
+
+            })
+    }
+
+    private fun showHistoryView() {
+        Thread(Runnable {
+            db.historyDao().getAll().reversed().run {
+                runOnUiThread {
+                    binding.historyRecyclerView.isVisible = true
+                    historyAdapter.submitList(this)
+                }
             }
-            Log.d(TAG,"${keywords.toString()}")
-        }.start()
+
+        }).start()
+
     }
 
-    private fun hideRecyclerView() {
-        Log.d(TAG,"history recyclerview 숨기기")
+    private fun hideHistoryView() {
         binding.historyRecyclerView.isVisible = false
     }
 
     private fun saveSearchKeyword(keyword: String) {
-        Log.d(TAG,"검색한 키워드 저장하기")
-        Thread {
+        Thread(Runnable {
             db.historyDao().insertHistory(History(null, keyword))
-        }.start()
+        }).start()
     }
 
     private fun deleteSearchKeyword(keyword: String) {
-        Thread {
+        Thread(Runnable {
             db.historyDao().delete(keyword)
-            showRecyclerView()
-        }.start()
-    }
-
-    private fun initBookRecyclerView() {
-        adapter = BookAdapter(itemClickedListener = {
-            val intent = Intent(this,DetailActivity::class.java)
-            intent.putExtra("bookModel",it)
-            startActivity(intent)
-        })
-
-        binding.bookRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.bookRecyclerView.adapter = adapter
-    }
-
-    private fun initHistoryRecyclerView() {
-        historyAdapter = HistoryAdapter(historyDeleteClickListener = {
-            deleteSearchKeyword(it)
-        })
-        binding.historyRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.historyRecyclerView.adapter = historyAdapter
-
-        initSearchEditText()
-    }
-
-
-    companion object {
-        private const val TAG = "MainActivity"
+            showHistoryView()
+        }).start()
     }
 }
