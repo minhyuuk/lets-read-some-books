@@ -54,6 +54,7 @@
                 android:id="@+id/reviewEditText"
                 android:layout_width="0dp"
                 android:layout_height="300dp"
+                android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/descriptionTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

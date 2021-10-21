@@ -3,10 +3,10 @@ package com.project.book.view
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.project.book.AppDatabase
 import com.project.book.databinding.ActivityDetailBinding
-import com.project.book.getAppDatabase
 import com.project.book.model.Book
 import com.project.book.model.Review
 
@@ -21,7 +21,11 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        db = getAppDatabase(this)
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "historyDB"
+        ).build()
 
         val bookModel = intent.getParcelableExtra<Book>("bookModel")
 
@@ -36,13 +40,8 @@ class DetailActivity : AppCompatActivity() {
 
         Thread {
             val review = db.reviewDao().getOne(bookModel?.id?.toInt() ?: 0)
-            // val review = bookModel?.id?.toInt()?.let { db.reviewDao().getOne(it) }
-            Log.e("t",review?.review.toString())
-
             runOnUiThread {
-                    Runnable {
-                        binding.reviewEditText.setText(review?.review.toString())
-                }
+                binding.reviewEditText.setText(review?.review.orEmpty())
             }
         }.start()
 

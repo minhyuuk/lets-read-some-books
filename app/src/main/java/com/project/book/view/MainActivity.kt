@@ -1,25 +1,22 @@
 package com.project.book.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.project.book.AppDatabase
 import com.project.book.adapter.BookAdapter
 import com.project.book.adapter.HistoryAdapter
 import com.project.book.api.BookService
 import com.project.book.databinding.ActivityMainBinding
+import com.project.book.getAppDatabase
 import com.project.book.model.BestSellerDTO
 import com.project.book.model.History
 import com.project.book.model.SearchBooksDTO
 import com.project.book.util.API
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,18 +33,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var db: AppDatabase
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "historyDB"
-        ).build()
+        db = getAppDatabase(this@MainActivity)
 
         adapter = BookAdapter(clickListener = {
             val intent = Intent(this, DetailActivity::class.java)
@@ -130,7 +122,6 @@ class MainActivity : AppCompatActivity() {
 
                     response.body()?.let {
                         adapter.submitList(it.books)
-                        Log.e("MainTag",adapter.submitList(it.books).toString())
                     }
                 }
 
