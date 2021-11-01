@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/motionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        app:layoutDescription="@xml/activity_splash_xml_constraintlayout_scene"
-        tools:context=".view.SplashActivity">
+        android:background="@color/splash_color"
+        app:layoutDescription="@xml/activity_splash_xml_constraintlayout_scene">
 
         <ImageView
-            android:id="@+id/splashImageView"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
-            android:src="@drawable/main_logo"
+            android:id="@+id/logoImage"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/book"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
         <TextView
-            android:id="@+id/copyrightTextView"
+            android:id="@+id/copyrightText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="copyright ©  INTO all rights reserved"
+            android:layout_marginBottom="30dp"
+            android:text="Copyright ©  INTO all rights reserved"
+            android:textColor="@color/white"
             android:textSize="16sp"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
+

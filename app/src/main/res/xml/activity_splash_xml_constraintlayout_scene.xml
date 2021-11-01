@@ -6,8 +6,26 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:autoTransition="animateToEnd"
+        motion:duration="2400">
        <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/logoImage"
+               motion:framePosition="30"
+               android:scaleX="1.2"
+               android:scaleY="1.2"
+               android:rotationX="0"
+               android:rotationY="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/logoImage"
+               motion:framePosition="55"
+               android:scaleX="0.7"
+               android:scaleY="0.7" />
+           <KeyAttribute
+               motion:motionTarget="@+id/logoImage"
+               motion:framePosition="100"
+               android:scaleX="50"
+               android:scaleY="50" />
        </KeyFrameSet>
     </Transition>
 
