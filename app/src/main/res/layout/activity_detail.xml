@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/main_color"
                 android:textSize="24sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +35,7 @@
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp"
+                android:background="@color/gray"
                 app:layout_constraintTop_toBottomOf="@id/titleTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -44,7 +44,7 @@
                 android:id="@+id/descriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/description_gray"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/coverImageView"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +54,8 @@
                 android:id="@+id/reviewEditText"
                 android:layout_width="0dp"
                 android:layout_height="300dp"
+                android:hint="감상평 남기기 : "
+                android:textSize="24sp"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/descriptionTextView"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,10 +66,14 @@
                 android:id="@+id/saveButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/main_color"
                 android:text="저장하기"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

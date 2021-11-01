@@ -40,9 +40,8 @@ class DetailActivity : AppCompatActivity() {
 
         Thread {
             val review = db.reviewDao().getOne(bookModel?.id?.toInt() ?: 0)
-            runOnUiThread {
-                binding.reviewEditText.setText(review?.review.orEmpty())
-            }
+           review?.let { runOnUiThread { binding.reviewEditText.setText(it.review) } }
+
         }.start()
 
         binding.saveButton.setOnClickListener {
@@ -53,7 +52,6 @@ class DetailActivity : AppCompatActivity() {
                         binding.reviewEditText.text.toString()
                     )
                 )
-
             }.start()
         }
 

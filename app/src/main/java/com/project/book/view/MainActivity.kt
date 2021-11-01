@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("bookModel", it)
             startActivity(intent)
         })
+
         historyAdapter = HistoryAdapter(historyDeleteClickListener = {
             deleteSearchKeyword(it)
         })
-
 
         val retrofit = Retrofit.Builder()
             .baseUrl(API.BASE_URL)
@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity() {
                         adapter.submitList(it.books)
                     }
                 }
-
             })
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -104,7 +103,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun search(text: String) {
 
-
         service.getBooksByName(API.KEY, text)
             .enqueue(object: Callback<SearchBooksDTO> {
                 override fun onFailure(call: Call<SearchBooksDTO>, t: Throwable) {
@@ -112,7 +110,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<SearchBooksDTO>, response: Response<SearchBooksDTO>) {
-
                     hideHistoryView()
                     saveSearchKeyword(text)
 
