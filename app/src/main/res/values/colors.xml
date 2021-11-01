@@ -8,5 +8,22 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FFAAAAAA</color>
-    <color name="main_color">#BAD6FF</color>
+
+    <color name="description_gray">#FF7E7E7E</color>
+
+    <color name="main_color">#FF0C2B69</color>
+
+    <color name="splash_color">#00C2FF</color>
+
+    <color name="sub_color">#FFDEEBFF</color>
+
+    <color name="one">#FF0336ff</color>
+    <color name="two">#FFffffff</color>
+    <color name="three">#FF0035c9</color>
+    <color name="four">#FFffde03</color>
+    <color name="five">#FF000000</color>
+    <color name="six">#FFffc000</color>
+    <color name="seven">#FFffffff</color>
+    <color name="eight">#FF000000</color>
+    <color name="nine">#FFb00020</color>
 </resources>
