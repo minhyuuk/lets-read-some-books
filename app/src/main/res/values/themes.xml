@@ -27,7 +27,7 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
-    <style name = "ThemeOfNickBucher" parent="Theme.AppCompat.NoActionBar">
+    <style name = "ThemeOfNickBucher" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="colorPrimary">@color/one</item>
         <item name="colorOnPrimary">@color/two</item>
