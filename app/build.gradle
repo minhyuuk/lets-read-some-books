@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -56,4 +57,9 @@ dependencies {
     // room
     implementation("androidx.room:room-runtime:2.3.0")
     kapt("androidx.room:room-compiler:2.3.0")
+
+    // firebase auth
+    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+    implementation 'com.google.firebase:firebase-auth:21.0.0'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
 }
