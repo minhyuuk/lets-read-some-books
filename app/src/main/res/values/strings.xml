@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Book</string>
+    <string name="client_id">0D:E7:09:EA:2B:53:A1:C8:03:31:D2:B4:60:7B:15:47:0E:10:79:D7</string>
+    <string name="client_secret">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</string>
 </resources>
