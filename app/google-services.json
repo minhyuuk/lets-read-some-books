@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "134687461992",
+    "project_id": "lets-read-some-books",
+    "storage_bucket": "lets-read-some-books.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134687461992:android:121b66b7c4c93218f9a1dd",
+        "android_client_info": {
+          "package_name": "com.project.book"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134687461992-r2f28dnlbuqbhg7896blarqa851cpu4j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.book",
+            "certificate_hash": "0de709ea2b53a1c80331d2b4607b15470e1079d7"
+          }
+        },
+        {
+          "client_id": "134687461992-s0s9avbjn48cciv3gsbproof77ri5p4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARqPAz3KF88jSY_KBS4t6QRLdc-G1-lLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134687461992-a692a7hlqvmrpi4hjn2k47v06nu3eliv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
