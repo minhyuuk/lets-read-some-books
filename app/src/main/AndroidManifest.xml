@@ -13,8 +13,8 @@
         android:theme="@style/ThemeOfNickBucher"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.SplashActivity"
-            android:exported="true">
+            android:name=".view.LoginActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,13 +22,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.SplashActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".view.DetailActivity"
             android:exported="true" />
         <activity
             android:name=".view.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
