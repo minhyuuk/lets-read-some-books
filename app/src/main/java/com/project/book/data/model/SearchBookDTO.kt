@@ -1,8 +1,8 @@
-package com.project.book.model
+package com.project.book.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class BestSellerDTO(
+data class SearchBooksDTO(
     @SerializedName("title") val title: String,
     @SerializedName("item") val books: List<Book>
 )

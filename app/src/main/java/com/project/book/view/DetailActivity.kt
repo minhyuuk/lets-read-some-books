@@ -1,14 +1,13 @@
 package com.project.book.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.project.book.AppDatabase
 import com.project.book.databinding.ActivityDetailBinding
-import com.project.book.model.Book
-import com.project.book.model.Review
+import com.project.book.data.model.Book
+import com.project.book.data.model.Review
 
 
 class DetailActivity : AppCompatActivity() {

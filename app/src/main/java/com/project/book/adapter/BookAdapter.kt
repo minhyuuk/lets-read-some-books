@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.project.book.databinding.ItemBookBinding
-import com.project.book.model.Book
+import com.project.book.data.model.Book
 
 
 class BookAdapter(val clickListener: (Book) -> Unit) : ListAdapter<Book, BookAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemBookBinding) : RecyclerView.ViewHolder(binding.root) {
-
 
         fun bind(bookModel: Book) {
             binding.titleTextView.text = bookModel.title

@@ -1,9 +1,9 @@
-package com.project.book.dao
+package com.project.book.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.project.book.model.History
+import com.project.book.data.model.History
 
 @Dao
 interface HistoryDao {

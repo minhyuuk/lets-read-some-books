@@ -1,8 +1,8 @@
-package com.project.book.api
+package com.project.book.data.api
 
 
-import com.project.book.model.BestSellerDTO
-import com.project.book.model.SearchBooksDTO
+import com.project.book.data.model.BestSellerDTO
+import com.project.book.data.model.SearchBooksDTO
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

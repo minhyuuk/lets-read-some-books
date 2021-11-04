@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.book.AppDatabase
 import com.project.book.adapter.BookAdapter
 import com.project.book.adapter.HistoryAdapter
-import com.project.book.api.BookService
+import com.project.book.data.api.BookService
 import com.project.book.databinding.ActivityMainBinding
 import com.project.book.getAppDatabase
-import com.project.book.model.BestSellerDTO
-import com.project.book.model.History
-import com.project.book.model.SearchBooksDTO
+import com.project.book.data.model.BestSellerDTO
+import com.project.book.data.model.History
+import com.project.book.data.model.SearchBooksDTO
 import com.project.book.util.API
 import retrofit2.Call
 import retrofit2.Callback

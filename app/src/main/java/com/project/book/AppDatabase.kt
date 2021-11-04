@@ -6,10 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.project.book.dao.HistoryDao
-import com.project.book.dao.ReviewDao
-import com.project.book.model.History
-import com.project.book.model.Review
+import com.project.book.data.dao.HistoryDao
+import com.project.book.data.dao.ReviewDao
+import com.project.book.data.model.History
+import com.project.book.data.model.Review
 
 @Database(entities = [History::class, Review::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {

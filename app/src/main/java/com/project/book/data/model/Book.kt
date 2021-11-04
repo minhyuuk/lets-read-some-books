@@ -1,4 +1,4 @@
-package com.project.book.model
+package com.project.book.data.model
 
 
 import android.os.Parcelable
