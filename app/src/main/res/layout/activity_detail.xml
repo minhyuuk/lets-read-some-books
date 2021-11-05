@@ -35,7 +35,7 @@
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/gray"
+                android:background="@drawable/detail_activity_image_view_background"
                 app:layout_constraintTop_toBottomOf="@id/titleTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
