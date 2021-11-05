@@ -1,59 +1,79 @@
 package com.project.book.view
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.project.book.AppDatabase
+import com.project.book.R
 import com.project.book.databinding.ActivityDetailBinding
 import com.project.book.data.model.Book
 import com.project.book.data.model.Review
+import com.project.book.getAppDatabase
 
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
+
     private lateinit var db: AppDatabase
 
+    private var model: Book? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityDetailBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "historyDB"
-        ).build()
+        db = getAppDatabase(this)
 
-        val bookModel = intent.getParcelableExtra<Book>("bookModel")
+        model = intent.getParcelableExtra("bookModel")
 
-        binding.titleTextView.text = bookModel?.title.orEmpty()
+        renderView()
 
-        Glide
-            .with(binding.coverImageView.context)
-            .load(bookModel?.coverSmallUrl.orEmpty())
-            .into(binding.coverImageView)
+        initSaveButton()
+    }
 
-        binding.descriptionTextView.text = bookModel?.description.orEmpty()
-
-        Thread {
-            val review = db.reviewDao().getOne(bookModel?.id?.toInt() ?: 0)
-           review?.let { runOnUiThread { binding.reviewEditText.setText(it.review) } }
-
-        }.start()
-
+    private fun initSaveButton() {
         binding.saveButton.setOnClickListener {
             Thread {
                 db.reviewDao().saveReview(
                     Review(
-                        bookModel?.id?.toInt() ?: 0,
+                        model?.id?.toInt() ?: 0,
                         binding.reviewEditText.text.toString()
                     )
                 )
             }.start()
         }
-
     }
 
+    private fun renderView() {
+
+        binding.titleTextView.text = model?.title.orEmpty()
+
+        binding.descriptionTextView.text = model?.description.orEmpty()
+
+        Glide.with(binding.coverImageView.context)
+            .load(model?.coverSmallUrl.orEmpty())
+            .into(binding.coverImageView)
+
+
+        // 저장된 리뷰 데이터 가져오기;
+        Thread {
+            val review = db.reviewDao().getOne(model?.id?.toInt() ?: 0)
+            review?.let {
+                runOnUiThread {
+                    binding.reviewEditText.setText(it.review)
+                }
+            }
+        }.start()
+    }
+    private fun imageBackgroundTranslucent(){
+        val alpha : Drawable = findViewById<ImageView>(R.id.coverImageView).background
+        alpha.alpha = 50
+    }
 }
+
+
