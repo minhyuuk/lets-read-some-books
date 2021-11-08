@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.project.book.databinding.ItemHistoryBinding
 import com.project.book.data.model.History
+import com.project.book.view.MainActivity
 
 
-class HistoryAdapter(val historyDeleteClickListener: (String) -> (Unit)) : ListAdapter<History, HistoryAdapter.ViewHolder>(diffUtil) {
+class HistoryAdapter(val historyDeleteClickListener: (String) -> Unit, mainActivity: MainActivity) : ListAdapter<History, HistoryAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
 

@@ -32,8 +32,8 @@ class DetailActivity : AppCompatActivity() {
         model = intent.getParcelableExtra("bookModel")
 
         renderView()
-
         initSaveButton()
+        imageBackgroundTranslucent()
     }
 
     private fun initSaveButton() {
@@ -60,16 +60,18 @@ class DetailActivity : AppCompatActivity() {
             .into(binding.coverImageView)
 
 
-        // 저장된 리뷰 데이터 가져오기;
+        // 저장된 리뷰 데이터 가져오기
         Thread {
             val review = db.reviewDao().getOne(model?.id?.toInt() ?: 0)
             review?.let {
                 runOnUiThread {
                     binding.reviewEditText.setText(it.review)
+
                 }
             }
         }.start()
     }
+
     private fun imageBackgroundTranslucent(){
         val alpha : Drawable = findViewById<ImageView>(R.id.coverImageView).background
         alpha.alpha = 50

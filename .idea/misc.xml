@@ -4,15 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/background_gray_stroke_radius_round.xml" value="0.290625" />
+        <entry key="app/src/main/res/drawable/background_review_edit_text.xml" value="0.45794871794871794" />
         <entry key="app/src/main/res/drawable/background_round_button.xml" value="0.46510416666666665" />
         <entry key="app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.46510416666666665" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.46510416666666665" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3758170988568809" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.44895833333333335" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_book.xml" value="0.45" />
         <entry key="app/src/main/res/layout/item_history.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/item_review_collector.xml" value="0.44895833333333335" />
       </map>
     </option>
   </component>
