@@ -51,21 +51,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bookServiceLoadBestSellers() {
-        // 베스트 셀러 가져오기;
+        // get best sellers
         bookService.getBestSeller(API.KEY)
             .enqueue(object : Callback<BestSellerDTO> {
-                // 응답이 온 경우;
+                // response
                 override fun onResponse(
                     call: Call<BestSellerDTO>,
                     response: Response<BestSellerDTO>
                 ) {
-                    // 받은 응답이 성공한 응답일 때;
+                    // response success
                     if (response.isSuccessful.not()) {
                         Log.e(M_TAG, "NOT!! SUCCESS")
                         return
                     }
 
-                    // 받은 응답의 바디가 채워져 있는 경우만 진행;
+                    // response
                     response.body()?.let {
                         Log.d(M_TAG, it.toString())
 
@@ -73,12 +73,12 @@ class MainActivity : AppCompatActivity() {
                             Log.d(M_TAG, book.toString())
                         }
 
-                        // 새 리스트로 갱신;
+                        // new list
                         bookRecyclerViewAdapter.submitList(it.books)
                     }
                 }
 
-                // 응답에 실패한 경우
+                // on failure
                 override fun onFailure(call: Call<BestSellerDTO>, t: Throwable) {
                     Log.e(M_TAG, t.toString())
                 }
@@ -87,8 +87,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBookService() {
         val retrofit = Retrofit.Builder()
-            .baseUrl(API.BASE_URL) // 인터파크 베이스 주소;
-            .addConverterFactory(GsonConverterFactory.create()) // Gson 변환기 사용;
+            .baseUrl(API.BASE_URL) // base url
+            .addConverterFactory(GsonConverterFactory.create()) // convert to gson
             .build()
 
         bookService = retrofit.create(BookService::class.java)
@@ -98,7 +98,6 @@ class MainActivity : AppCompatActivity() {
         bookRecyclerViewAdapter = BookAdapter(clickListener = {
             val intent = Intent(this, DetailActivity::class.java)
 
-            // 직렬화 해서 넘길 것.
             intent.putExtra("bookModel", it)
             startActivity(intent)
         })
@@ -123,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
         bookService.getBooksByName(API.KEY,keyword)
             .enqueue(object : Callback<SearchBooksDTO> {
-                // 성공.
+                // success
 
                 override fun onResponse(
                     call: Call<SearchBooksDTO>,
@@ -139,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                     bookRecyclerViewAdapter.submitList(response.body()?.books.orEmpty()) // 새 리스트로 갱신
                 }
 
-                // 실패.
+                // failure
                 override fun onFailure(call: Call<SearchBooksDTO>, t: Throwable) {
                     hideHistoryView()
                     Log.e(M_TAG, t.toString())
@@ -178,14 +177,14 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun initSearchEditText() {
         binding.searchEditText.setOnKeyListener { v, keyCode, event ->
-            // 키보드 입력시 발생
+            // enter
 
-            // 엔터 눌렀을 경우 (눌렀거나, 뗏을 때 -> 눌렀을 때 발생하도록.)
+            // enter -> search event
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == MotionEvent.ACTION_DOWN) {
                 bookServiceSearchBook(binding.searchEditText.text.toString())
-                return@setOnKeyListener true// 처리 되었음.
+                return@setOnKeyListener true
             }
-            return@setOnKeyListener false // 처리 안됬음 을 나타냄.
+            return@setOnKeyListener false
         }
 
         binding.searchEditText.setOnTouchListener { v, event ->
