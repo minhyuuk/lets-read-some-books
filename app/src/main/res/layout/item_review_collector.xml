@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
@@ -13,7 +12,6 @@
         card_view:contentPadding="4dp">
 
         <RelativeLayout
-            android:elevation="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp">
@@ -36,11 +34,13 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/coverImageView"
                 android:layout_toRightOf="@id/coverImageView"
-                android:text="TextView "
+                android:paddingRight="32dp"
+                android:text="안 녕 하 십 니 까 저 는 안 드 로 이"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
+
                 android:id="@+id/descriptionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
