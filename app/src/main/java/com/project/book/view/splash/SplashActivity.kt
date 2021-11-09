@@ -1,4 +1,4 @@
-package com.project.book.view
+package com.project.book.view.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.os.Handler
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.project.book.R
 import com.project.book.databinding.ActivitySplashBinding
+import com.project.book.view.main.MainActivity
 
 
 class SplashActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun handler(){
         Handler().postDelayed({
-            val intent = Intent(this@SplashActivity,MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }, DURATION)

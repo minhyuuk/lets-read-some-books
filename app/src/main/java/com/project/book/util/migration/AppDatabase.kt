@@ -1,4 +1,4 @@
-package com.project.book
+package com.project.book.util.migration
 
 import android.content.Context
 import androidx.room.Database

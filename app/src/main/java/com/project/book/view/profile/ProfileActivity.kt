@@ -1,4 +1,4 @@
-package com.project.book.view
+package com.project.book.view.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

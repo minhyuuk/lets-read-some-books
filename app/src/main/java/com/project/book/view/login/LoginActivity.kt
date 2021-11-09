@@ -1,4 +1,4 @@
-package com.project.book.view
+package com.project.book.view.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

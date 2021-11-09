@@ -1,17 +1,16 @@
-package com.project.book.view
+package com.project.book.view.detail
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import com.bumptech.glide.Glide
-import com.project.book.AppDatabase
 import com.project.book.R
 import com.project.book.databinding.ActivityDetailBinding
 import com.project.book.data.model.Book
 import com.project.book.data.model.Review
-import com.project.book.getAppDatabase
+import com.project.book.util.migration.AppDatabase
+import com.project.book.util.migration.getAppDatabase
 
 
 class DetailActivity : AppCompatActivity() {

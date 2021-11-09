@@ -1,4 +1,4 @@
-package com.project.book.view
+package com.project.book.view.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,16 +9,17 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.project.book.AppDatabase
 import com.project.book.adapter.BookAdapter
 import com.project.book.adapter.HistoryAdapter
 import com.project.book.data.api.BookService
 import com.project.book.databinding.ActivityMainBinding
-import com.project.book.getAppDatabase
 import com.project.book.data.model.BestSellerDTO
 import com.project.book.data.model.History
 import com.project.book.data.model.SearchBooksDTO
 import com.project.book.util.API
+import com.project.book.util.migration.AppDatabase
+import com.project.book.util.migration.getAppDatabase
+import com.project.book.view.detail.DetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
