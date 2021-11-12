@@ -3,9 +3,10 @@ package com.project.book.view.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarItemView
+import com.google.android.material.internal.NavigationMenuItemView
 import com.project.book.R
 import com.project.book.databinding.ActivityMainBinding
 import com.project.book.view.profile.ProfileActivity
@@ -23,7 +24,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.bnvMain.setOnNavigationItemSelectedListener(this)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    override fun onStart() {
+        super.onStart()
+//        updateNavigationBarState()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0, 0)
+    }
+
+    override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
         binding.bnvMain.postDelayed({
             val itemId = item.itemId
             if (itemId == R.id.my_search) {
@@ -39,8 +50,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }, 300)
         return true
     }
+
     private fun updateNavigationBarState() {
-        val actionId: Int = ()
+        val actionId: Int = NavigationMenuItemView.generateViewId()
         selectBottomNavigationBarItem(actionId)
     }
+
+    private fun selectBottomNavigationBarItem(itemId: Int) {
+        val item: MenuItem = binding.bnvMain.menu.findItem(itemId)
+        item.isChecked = true
+    }
+
 }
