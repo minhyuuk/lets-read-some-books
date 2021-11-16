@@ -1,64 +1,52 @@
 package com.project.book.view.main
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.internal.NavigationMenuItemView
+import androidx.fragment.app.Fragment
 import com.project.book.R
 import com.project.book.databinding.ActivityMainBinding
-import com.project.book.view.profile.ProfileActivity
-import com.project.book.view.search.SearchActivity
-import com.project.book.view.settings.SettingsActivity
+import com.project.book.view.home.HomeFragment
+import com.project.book.view.profile.ProfileFragment
+import com.project.book.view.settings.SettingsFragment
 
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
-    private val binding by lazy {ActivityMainBinding.inflate(layoutInflater)}
+    private val homeFragment by lazy { HomeFragment() }
+    private val profileFragment by lazy { ProfileFragment() }
+    private val settingsFragment by lazy { SettingsFragment() }
+
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.bnvMain.setOnNavigationItemSelectedListener(this)
+
+        initNavigationView()
     }
 
-    override fun onStart() {
-        super.onStart()
-//        updateNavigationBarState()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        overridePendingTransition(0, 0)
-    }
-
-    override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
-        binding.bnvMain.postDelayed({
-            val itemId = item.itemId
-            if (itemId == R.id.my_search) {
-                startActivity(Intent(this, SearchActivity::class.java))
-            } else if (itemId == R.id.my_home) {
-                startActivity(Intent(this, ProfileActivity::class.java))
-            } else if (itemId == R.id.my_profile) {
-                startActivity(Intent(this, ProfileActivity::class.java))
-            } else if (itemId == R.id.my_settings) {
-                startActivity(Intent(this, SettingsActivity::class.java))
+    private fun initNavigationView() {
+        binding.bnvMain.run {
+            setOnNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.my_home -> {
+                        changeFragment(homeFragment)
+                    }
+                    R.id.my_profile -> {
+                        changeFragment(profileFragment)
+                    }
+                    R.id.my_settings ->{
+                        changeFragment(settingsFragment)
+                    }
+                }
+                true
             }
-            finish()
-        }, 300)
-        return true
+            selectedItemId = R.id.my_home
+        }
     }
 
-    private fun updateNavigationBarState() {
-        val actionId: Int = NavigationMenuItemView.generateViewId()
-        selectBottomNavigationBarItem(actionId)
-    }
-
-    private fun selectBottomNavigationBarItem(itemId: Int) {
-        val item: MenuItem = binding.bnvMain.menu.findItem(itemId)
-        item.isChecked = true
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
     }
 
 }
