@@ -12,7 +12,6 @@ import com.project.book.data.model.Review
 import com.project.book.util.migration.AppDatabase
 import com.project.book.util.migration.getAppDatabase
 
-
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
@@ -76,5 +75,3 @@ class DetailActivity : AppCompatActivity() {
         alpha.alpha = 50
     }
 }
-
-
