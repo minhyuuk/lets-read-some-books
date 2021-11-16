@@ -17,6 +17,8 @@
 
     <color name="sub_color">#FFDEEBFF</color>
 
+    <color name = "red">#FF5151</color>
+
     <color name="one">#FF0336ff</color>
     <color name="two">#FFffffff</color>
     <color name="three">#FF0035c9</color>
