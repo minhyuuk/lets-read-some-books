@@ -33,41 +33,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        emailTextWatcher()
-//        passwordTextWatcher()
         setGoogleLogin()
-    }
-
-    private fun emailTextWatcher() {
-        binding.textInputTextEmail.addTextChangedListener(object : TextWatcher{
-
-            override fun afterTextChanged(p0: Editable?) {
-//                if(binding.textInputTextEmail.text!!.isEmpty())
-//                    binding.textInputLayoutEmail.error = "올바른 입력 값이 아닙니다!"
-//                else{
-//
-//                }
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
-    }
-
-    private fun passwordTextWatcher() {
-        binding.textInputTextPassword.addTextChangedListener(object : TextWatcher{
-
-            override fun afterTextChanged(p0: Editable?) {
-//                if(binding.textInputTextPassword.text!!.isEmpty())
-//                    binding.textInputLayoutPassword.error = "올바른 입력 값이 아닙니다!"
-//                else{
-//
-//                }
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
     }
 
     private fun setGoogleLogin(){
@@ -90,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!.idToken)
             } catch (e: ApiException) {
-                Toast.makeText(this, "Failed Google Login", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "구글 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
