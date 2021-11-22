@@ -1,94 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.login.LoginActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <TextView
-            android:id="@+id/highlight_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="161dp"
-            android:text="책좀 보자"
-            android:textColor="@color/main_color"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            tools:context=".view.login.LoginActivity">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_email"
-            android:layout_width="342dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            app:errorEnabled="true"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
-            android:hint="이메일 입력하기"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/highlight_text">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_text_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/highlight_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="140dp"
+                            android:text="책좀 보자"
+                            android:textColor="@color/main_color"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/text_input_layout_email"
+                            android:layout_width="342dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:hint="이메일 입력하기"
+                            app:errorEnabled="true"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/highlight_text">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_password"
-            android:layout_marginTop="20dp"
-            android:layout_width="342dp"
-            android:layout_height="wrap_content"
-            android:hint="비밀번호 입력하기"
-            app:errorEnabled="true"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_email">
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/text_input_text_email"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textEmailAddress" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/text_input_text_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/text_input_layout_password"
+                            android:layout_width="342dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:hint="비밀번호 입력하기"
+                            app:errorEnabled="true"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_email"
+                            app:passwordToggleEnabled="true">
 
-        <TextView
-            android:id="@+id/signup_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="회원가입"
-            android:textColor="@color/gray"
-            android:layout_marginLeft="280dp"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_password" />
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/text_input_text_password"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/google_login_button"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="500dp"
-            android:background="@drawable/background_round_button"
-            android:gravity="center"
-            android:drawableLeft="@drawable/google_24px"
-            android:paddingLeft="5dp"
-            android:paddingRight="20dp"
-            android:text="구글 아이디로 로그인"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></Button>
+                        </com.google.android.material.textfield.TextInputLayout>
 
-        
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/signup_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="280dp"
+                            android:layout_marginTop="5dp"
+                            android:text="회원가입"
+                            android:textColor="@color/gray"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_password" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/email_login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_signup"
+                    android:backgroundTint="@color/sub_color"
+                    android:fontFamily="@font/apple_sd_font"
+                    android:text="로그인"
+                    android:layout_marginTop="40dp"
+                    android:textSize="16sp"
+
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+                <Button
+                    android:id="@+id/google_login_button"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/background_round_button"
+                    android:drawableLeft="@drawable/google_24px"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="20dp"
+                    android:text="구글 아이디로 로그인"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email_login_button"></Button>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
