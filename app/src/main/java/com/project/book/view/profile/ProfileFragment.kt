@@ -11,11 +11,12 @@ import com.project.book.databinding.FragmentProfileBinding
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return binding.root
+    override fun FragmentProfileBinding.onViewCreated() {
+
     }
+
+    override fun FragmentProfileBinding.onCreateView() {
+
+    }
+
 }

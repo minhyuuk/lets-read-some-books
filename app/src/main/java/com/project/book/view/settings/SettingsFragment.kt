@@ -17,17 +17,12 @@ import com.project.book.view.login.LoginActivity
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout.fragment_settings) {
     private var auth: FirebaseAuth? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun FragmentSettingsBinding.onViewCreated() {
         signOut()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun FragmentSettingsBinding.onCreateView() {
 
-        return binding.root
     }
 
     private fun signOut() {

@@ -18,6 +18,7 @@ import com.project.book.R
 import com.project.book.base.BaseActivity
 import com.project.book.databinding.ActivityLoginBinding
 import com.project.book.util.Extensions.toast
+import com.project.book.view.login.signup.SignupActivity
 import com.project.book.view.main.MainActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -28,19 +29,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setGoogleLogin()
 
         auth = FirebaseAuth.getInstance()
+
+        setGoogleLogin()
         login()
+        nextPage()
     }
 
-    override fun onStart() {
-        super.onStart()
-         val user = FirebaseAuth.getInstance().currentUser
-        user?.let {
-            startActivity(Intent(this,MainActivity::class.java))
-        }
-    }
 
     private fun setGoogleLogin(){
         val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -78,23 +74,31 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     }
                 })
     }
-    private fun loginLogic(){
-        val email=binding.textInputTextEmail.text.toString()
-        val password=binding.textInputTextPassword.text.toString()
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-            if(task.isSuccessful){
-                val intent= Intent(this,MainActivity::class.java)
+    private fun loginLogic() {
+        val email = binding.textInputTextEmail.text.toString()
+        val password = binding.textInputTextPassword.text.toString()
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                toast("로그인에 성공했습니다")
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
         }.addOnFailureListener { exception ->
-            Toast.makeText(applicationContext,exception.localizedMessage, Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
         }
     }
 
     private fun login(){
         binding.emailLoginButton.setOnClickListener{
             loginLogic()
+        }
+    }
+    private fun nextPage(){
+        binding.signupText.setOnClickListener{
+            startActivity(Intent(this,SignupActivity::class.java))
+            overridePendingTransition(0,0)
+            finish()
         }
     }
 

@@ -24,12 +24,17 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
 
         auth = FirebaseAuth.getInstance()
 
+        signUp()
+        equalPassword()
+        backPage()
+    }
+
+    private fun signUp() {
         binding.signupButton.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             val password = binding.editPassword.text.toString().trim()
 
             createUser(email, password)
-            equalPassword()
         }
     }
 
@@ -67,7 +72,13 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
 
         })
     }
-
+    private fun backPage(){
+        binding.backPressButton.setOnClickListener{
+            startActivity(Intent(this,LoginActivity::class.java))
+            overridePendingTransition(0,0)
+            finish()
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
