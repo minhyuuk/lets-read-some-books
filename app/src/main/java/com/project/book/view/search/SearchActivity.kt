@@ -9,8 +9,10 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.project.book.R
 import com.project.book.adapter.BookAdapter
 import com.project.book.adapter.HistoryAdapter
+import com.project.book.base.BaseActivity
 import com.project.book.data.api.BookService
 import com.project.book.data.model.BestSellerDTO
 import com.project.book.data.model.History
@@ -26,9 +28,8 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_search) {
 
-    private lateinit var binding: ActivitySearchBinding
     private lateinit var bookRecyclerViewAdapter: BookAdapter
     private lateinit var bookService: BookService
     private lateinit var historyAdapter: HistoryAdapter

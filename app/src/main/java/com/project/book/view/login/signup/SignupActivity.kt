@@ -6,14 +6,15 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import com.google.firebase.auth.FirebaseAuth
+import com.project.book.R
+import com.project.book.base.BaseActivity
 import com.project.book.databinding.ActivitySignupBinding
 import com.project.book.util.Extensions.toast
 import com.project.book.view.login.LoginActivity
 
-class SignupActivity : AppCompatActivity() {
+class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_signup) {
 
     private var _binding: ActivitySignupBinding? = null
-    private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {

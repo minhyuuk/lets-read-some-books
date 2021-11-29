@@ -6,18 +6,16 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.project.book.R
+import com.project.book.base.BaseActivity
 import com.project.book.databinding.ActivityDetailBinding
 import com.project.book.data.model.Book
 import com.project.book.data.model.Review
 import com.project.book.util.migration.AppDatabase
 import com.project.book.util.migration.getAppDatabase
 
-class DetailActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityDetailBinding
+class DetailActivity : BaseActivity<ActivityDetailBinding>(R.layout.activity_detail) {
 
     private lateinit var db: AppDatabase
-
     private var model: Book? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

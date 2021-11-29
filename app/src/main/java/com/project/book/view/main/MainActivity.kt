@@ -4,19 +4,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.project.book.R
+import com.project.book.base.BaseActivity
 import com.project.book.databinding.ActivityMainBinding
 import com.project.book.view.home.HomeFragment
 import com.project.book.view.profile.ProfileFragment
 import com.project.book.view.settings.SettingsFragment
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val homeFragment by lazy { HomeFragment() }
     private val profileFragment by lazy { ProfileFragment() }
     private val settingsFragment by lazy { SettingsFragment() }
-
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

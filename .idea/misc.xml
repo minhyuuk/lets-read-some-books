@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.39402173913043476" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.39855072463768115" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_book.xml" value="0.45" />
         <entry key="app/src/main/res/layout/item_history.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_review_collector.xml" value="0.44895833333333335" />

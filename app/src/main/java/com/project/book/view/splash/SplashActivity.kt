@@ -7,15 +7,13 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.project.book.R
+import com.project.book.base.BaseActivity
 import com.project.book.databinding.ActivitySplashBinding
 import com.project.book.view.login.LoginActivity
 import com.project.book.view.main.MainActivity
 
 
-class SplashActivity : AppCompatActivity() {
-
-    private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
-
+class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,13 +1,9 @@
 package com.project.book.view.login
 
-import android.app.Activity
 import android.content.Intent
-import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -19,23 +15,23 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.project.book.R
+import com.project.book.base.BaseActivity
 import com.project.book.databinding.ActivityLoginBinding
 import com.project.book.util.Extensions.toast
 import com.project.book.view.main.MainActivity
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private lateinit var client: GoogleSignInClient
-    private var auth: FirebaseAuth? = null
-
-
+    private lateinit var  auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setGoogleLogin()
 
+        auth = FirebaseAuth.getInstance()
+        login()
     }
 
     override fun onStart() {
@@ -44,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
         user?.let {
             startActivity(Intent(this,MainActivity::class.java))
         }
-
     }
 
     private fun setGoogleLogin(){
@@ -74,13 +69,33 @@ class LoginActivity : AppCompatActivity() {
 
     private fun firebaseAuthWithGoogle(idToken: String?) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth?.signInWithCredential(credential)
-            ?.addOnCompleteListener(this,
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this,
                 OnCompleteListener<AuthResult?> { task ->
                     if (task.isSuccessful) {
                         // 인증에 성공한 후, 현재 로그인된 유저의 정보를 가져올 수 있다.
-                        val email = auth?.currentUser?.email
+                        val email = auth.currentUser?.email
                     }
                 })
     }
+    private fun loginLogic(){
+        val email=binding.textInputTextEmail.text.toString()
+        val password=binding.textInputTextPassword.text.toString()
+        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                val intent= Intent(this,MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(applicationContext,exception.localizedMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun login(){
+        binding.emailLoginButton.setOnClickListener{
+            loginLogic()
+        }
+    }
+
 }
