@@ -1,10 +1,13 @@
 package com.project.book.view.login.signup
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.project.book.R
 import com.project.book.base.BaseActivity
@@ -41,19 +44,29 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
     private fun createUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
+                if (task.isSuccessful && (binding.editPassword.text.toString() == binding.editPasswordCheck.text.toString())) {
                     toast("회원가입 성공")
                     var intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(0,0)
+                    finish()
                 } else {
-                    toast("회원가입 실패")
+                    dialog(binding.root)
                 }
             }
             .addOnFailureListener {
                 toast("회원가입 실패")
             }
     }
-
+    fun dialog(view: View) {
+        AlertDialog.Builder(view.context).apply {
+            setTitle("비밀번호 6자 이상")
+            setMessage("비밀번호는 6자 이상으로 설정해주세요!")
+            setPositiveButton("네 알겠어요!", DialogInterface.OnClickListener { dialog, which ->
+            })
+            show()
+        }
+    }
     private fun equalPassword() {
         binding.editPasswordCheck.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -65,7 +78,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (binding.editPassword.text.toString() == binding.editPasswordCheck.text.toString()) { binding.textFailToPassword.text = "" }
+                if (binding.editPassword.text.toString() == binding.editPasswordCheck.text.toString())
+                { binding.textFailToPassword.text = "" }
                 else { binding.textFailToPassword.text = "비밀번호가 일치하지 않습니다" }
 
             }

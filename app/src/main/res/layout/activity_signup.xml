@@ -38,7 +38,7 @@
                     android:layout_marginTop="100dp"
                     android:fontFamily="@font/apple_sd_font"
                     android:text="이메일 주소"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/main_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -50,8 +50,9 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/background_signup"
                     android:fontFamily="@font/apple_sd_font"
-                    android:hint="example@gmail.com"
+                    android:hint="이메일 입력"
                     android:inputType="textEmailAddress"
+                    android:maxLines="1"
                     android:padding="10dp"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +65,7 @@
                     android:layout_marginTop="250dp"
                     android:fontFamily="@font/apple_sd_font"
                     android:text="비밀번호"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/main_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -76,12 +77,24 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/background_signup"
                     android:fontFamily="@font/apple_sd_font"
-                    android:hint="a1234567"
+                    android:hint="비밀번호 입력"
                     android:inputType="textPassword"
+                    android:maxLines="1"
                     android:padding="10dp"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_password" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/apple_sd_font"
+                    android:text="비밀번호는 6자 이상으로 작성해주세요"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
                 <TextView
                     android:id="@+id/text_password_right"
@@ -90,7 +103,7 @@
                     android:layout_marginTop="400dp"
                     android:fontFamily="@font/apple_sd_font"
                     android:text="비밀번호 확인"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/main_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -102,8 +115,9 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/background_signup"
                     android:fontFamily="@font/apple_sd_font"
-                    android:hint="a1234567"
+                    android:hint="비밀번호 확인"
                     android:inputType="textPassword"
+                    android:maxLines="1"
                     android:padding="10dp"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -115,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="50dp"
                     android:fontFamily="@fot/apple_sd_font"
                     android:text=" "
                     android:textColor="@color/red"
@@ -129,6 +144,7 @@
             android:id="@+id/signup_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:background="@drawable/background_signup"
             android:backgroundTint="@color/sub_color"
             android:fontFamily="@font/apple_sd_font"
@@ -136,8 +152,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/scroll_view"
-            tools:layout_editor_absoluteX="20dp"
-            android:layout_marginTop="40dp"/>
+            tools:layout_editor_absoluteX="20dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
