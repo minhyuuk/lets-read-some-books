@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
@@ -51,6 +52,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
                     overridePendingTransition(0,0)
                     finish()
                 } else {
+                    Log.d("SignUpActivity",task.result.toString())
                     dialog(binding.root)
                 }
             }

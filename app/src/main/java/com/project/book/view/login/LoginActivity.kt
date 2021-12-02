@@ -26,6 +26,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     private lateinit var client: GoogleSignInClient
     private lateinit var  auth: FirebaseAuth
+    private var backTime : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +65,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             overridePendingTransition(0,0)
             finish()
         }
+    }
+
+    override fun onBackPressed() {
+        Log.d("LoginActivity - 뒤로가기","뒤로가기")
+
+        if(System.currentTimeMillis() - backTime < 2000){
+            finish()
+            return
+        }
+        toast("뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.")
+        backTime = System.currentTimeMillis()
+
     }
 
 }
