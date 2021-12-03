@@ -24,6 +24,7 @@
         <entry key="app/src/main/res/layout/item_history.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_review_collector.xml" value="0.44895833333333335" />
         <entry key="app/src/main/res/menu/navi_menu.xml" value="0.44895833333333335" />
+        <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.2671875" />
       </map>
     </option>
   </component>
