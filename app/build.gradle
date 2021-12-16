@@ -64,6 +64,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.0'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx:19.3.2'
 
     // recyclerview, cardview
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc03"
