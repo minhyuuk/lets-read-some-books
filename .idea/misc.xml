@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.4588541666666667" />
         <entry key="app/src/main/res/drawable/background_gray_stroke_radius_round.xml" value="0.290625" />
         <entry key="app/src/main/res/drawable/background_gray_stroke_radius_round_16dp.xml" value="0.4425925925925926" />
         <entry key="app/src/main/res/drawable/background_review_edit_text.xml" value="0.45794871794871794" />
@@ -12,19 +13,21 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.46510416666666665" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5019145462235218" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.44895833333333335" />
-        <entry key="app/src/main/res/layout/activity_search.xml" value="0.40307971014492755" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2625" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.39402173913043476" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.39855072463768115" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.15651906331380205" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_book.xml" value="0.45" />
         <entry key="app/src/main/res/layout/item_history.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/item_home_best_seller.xml" value="0.41893115942028986" />
         <entry key="app/src/main/res/layout/item_review_collector.xml" value="0.44895833333333335" />
         <entry key="app/src/main/res/menu/navi_menu.xml" value="0.44895833333333335" />
-        <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.2671875" />
+        <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.33" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/icon.xml" value="0.4046296296296296" />
       </map>
     </option>

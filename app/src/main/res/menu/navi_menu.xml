@@ -15,5 +15,4 @@
         android:title="설정"
         android:enabled="true"
         android:icon="@drawable/settings"/>
-
 </menu>

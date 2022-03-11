@@ -33,6 +33,10 @@ class LoginActivity() : BaseActivity<ActivityLoginBinding>(R.layout.activity_log
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
     override fun onStart() {
         super.onStart()
         Log.d("LoginActivity","onStart")
