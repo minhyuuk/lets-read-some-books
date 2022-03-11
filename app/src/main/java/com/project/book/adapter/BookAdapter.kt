@@ -27,7 +27,6 @@ class BookAdapter(val clickListener: (Book) -> Unit) : ListAdapter<Book, BookAda
                 clickListener(bookModel)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

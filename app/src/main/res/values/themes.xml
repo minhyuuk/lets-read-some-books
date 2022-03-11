@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Book" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Changed" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,34 +14,27 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MyStyle" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- 상태바 컬러 : main color로 설정 -->
-        <item name="android:statusBarColor">@color/main_color</item>
-        <!-- 타이틀바 제거 -->
-        <item name="android:windowNoTitle">true</item>
-        <!-- 액션바 제거 -->
-        <item name="android:windowActionBar">false</item>
-        <!-- 윈도우 배경 : 검은색 -->
-        <item name="android:background">@color/white</item>
-        <!-- 앱이 켜질 때 미리보기 제거 -->
-        <item name="android:windowDisablePreview">true</item>
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="android:textColorPrimary">@color/main_color</item>
+        <item name="colorPrimaryDark">@color/splash_color</item>
+        <item name="android:textColorSecondary">@color/main_color</item>
+        <item name="colorAccent">@color/main_color</item>
+
     </style>
 
     <style name = "ThemeOfNickBucher" parent="Theme.AppCompat.Light.NoActionBar">
-
         <item name="colorPrimary">@color/one</item>
+        <item name="colorPrimaryDark">@color/one</item>
         <item name="colorOnPrimary">@color/two</item>
         <item name="colorPrimaryVariant">@color/three</item>
         <item name="colorSecondary">@color/four</item>
-        <item name="colorOnSecondary">@color/two</item>
+        <item name="colorOnSecondary">@color/one</item>
         <item name="colorSecondaryVariant">@color/six</item>
         <item name="colorSurface">@color/seven</item>
         <item name="colorOnSurface">@color/two</item>
         <item name="colorError">@color/nine</item>
-
-        <!--   action 없애기     -->
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowDisablePreview">true</item>
+        <item name = "windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 </resources>
