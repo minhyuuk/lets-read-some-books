@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.book.R
 import com.project.book.adapter.BookAdapter
@@ -18,6 +19,8 @@ import com.project.book.data.model.BestSellerDTO
 import com.project.book.data.model.History
 import com.project.book.data.model.SearchBooksDTO
 import com.project.book.databinding.ActivitySearchBinding
+import com.project.book.databinding.FragmentHomeBinding
+import com.project.book.databinding.ItemHomeBestSellerBinding
 import com.project.book.util.API
 import com.project.book.util.migration.AppDatabase
 import com.project.book.util.migration.getAppDatabase
@@ -40,16 +43,22 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivitySearchBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         initBookRecyclerView()
         initHistoryRecyclerView()
         initSearchEditText()
-
         initBookService()
         bookServiceLoadBestSellers()
+
+        setSupportActionBar(binding.toolBar)
+        supportActionBar?.apply {
+            title = "책좀 보자"
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
     }
 
     private fun bookServiceLoadBestSellers() {
@@ -77,6 +86,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
 
                         // new list
                         bookRecyclerViewAdapter.submitList(it.books)
+
                     }
                 }
 
@@ -106,6 +116,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = bookRecyclerViewAdapter
+
+
     }
 
     private fun initHistoryRecyclerView() {
@@ -120,7 +132,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
     }
 
 
-    fun bookServiceSearchBook(keyword: String) {
+    private fun bookServiceSearchBook(keyword: String) {
 
         bookService.getBooksByName(API.KEY,keyword)
             .enqueue(object : Callback<SearchBooksDTO> {
