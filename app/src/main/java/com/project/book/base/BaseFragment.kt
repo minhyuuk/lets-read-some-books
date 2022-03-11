@@ -26,4 +26,5 @@ open class BaseFragment<T: ViewDataBinding>(@LayoutRes val layoutRes: Int) : Fra
 
     open fun T.onCreateView() = Unit
     open fun T.onViewCreated() = Unit
+
 }
